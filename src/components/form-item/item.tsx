@@ -16,7 +16,7 @@ type formItem = {
     isLast: boolean,
 };
 
-const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
+export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
     const { id, count, breed, subbreed } = data;
     const dispatch = useDispatch();
     return (

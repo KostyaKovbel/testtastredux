@@ -1,8 +1,12 @@
 import { Button } from '@mui/material';
-import React, { lazy, useState } from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 import { useAppSelector } from '../../redux/features/hooks';
 import { RootState } from '../../redux/store';
 import './styles.scss';
+import { actionBreeds } from '../../redux/actions/breedsActions';
+import { useAppDispatch } from '../../redux/features/hooks';
+import { getBreeds } from '../../utils/api';
+
 
 const Item = lazy(() => import('../form-item/item'));
 const ImageModal = lazy(() => import('../modal/modal'));
@@ -23,12 +27,19 @@ type DogDataType = {
     userData: UserDataType[],
 }
 
-const Form: React.FC = () => {
+export const Form: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const breedList: DogDataType = useAppSelector<RootState>(state => state);
-    console.log()
+
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+      getBreeds('breeds/list/all').then((dataFromServer) => {
+        dispatch(actionBreeds.loadBreeds(dataFromServer.message));
+      });
+    }, [dispatch]);
     return (
         <div className="form">
+            <h3 className="form__title">Dog generator</h3>
             {breedList.userData.map((el: UserDataType) =>
                 <Item 
                     key={el.id} 

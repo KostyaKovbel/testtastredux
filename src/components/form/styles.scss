@@ -3,6 +3,10 @@
     flex-direction: column;
     padding: 40px;
 
+    &__title {
+        display: flex;
+        justify-content: center;
+    }
     &__button {
         width: 60%;
         align-self: center;
