@@ -1,9 +1,11 @@
+import uuid from "react-uuid";
+
 type BreedList = {
     [key: string]: string[],
 };
 
 type userDataType = {
-    id: number,
+    id: string,
     breed: string,
     subbreed: string,
     count: number,
@@ -16,7 +18,7 @@ type FetchAction = {
 
 type ActionType = {
     payload?: {
-        id: number,
+        id: string,
         count: number,
         breed: string,
         subbreed: string,
@@ -35,7 +37,7 @@ export const breedsReducer = (state: BreedList = {}, action: FetchAction) => {
 }
 
 const initialUserDataState = [{
-    id: 1,
+    id: uuid(),
     count: 1,
     breed: '',
     subbreed: '',
@@ -44,7 +46,7 @@ const initialUserDataState = [{
 export const userDataReducer = (userData: userDataType[] = initialUserDataState, action: ActionType) =>  {
     switch (action.type) {
         case 'addNewField':
-            return [...userData, { id: userData.length + 1, breed: '', subbreed: '', count: 1 }];
+            return [...userData, { id: uuid(), breed: '', subbreed: '', count: 1 }];
         case 'updateCount':
             return userData.reduce((total: userDataType[], current: userDataType) => action.payload?.id === current.id
                 ? [...total, { ...current, count: action.payload?.count }]

@@ -16,7 +16,7 @@ type BreedList = {
 };
 
 type UserDataType = {
-    id: number,
+    id: string,
     breed: string,
     subbreed: string,
     count: number,
@@ -40,12 +40,12 @@ export const Form: React.FC = () => {
     return (
         <div className="form">
             <h3 className="form__title">Dog generator</h3>
-            {breedList.userData.map((el: UserDataType) =>
+            {breedList.userData.map((el: UserDataType, index: number) =>
                 <Item 
                     key={el.id} 
                     breeds={breedList.breeds as BreedList} 
                     data={el} 
-                    isLast={el.id !== breedList.userData.length} 
+                    isLast={index + 1 !== breedList.userData.length} 
                 />
             )}
             <Button 

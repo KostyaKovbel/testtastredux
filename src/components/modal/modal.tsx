@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Button, Modal } from "@mui/material"
+import uuid from 'react-uuid';
 
 import { RootState } from "../../redux/store";
 import { getBreeds } from '../../utils/api';
@@ -12,7 +13,7 @@ type ImageModalType = {
 }
 
 type PayloadData = {
-    id: number,
+    id: string,
     subbreed: string,
     breed: string,
     count: number,
@@ -56,7 +57,7 @@ const ImageModal: React.FC<ImageModalType> = ({ isOpen, handleClose }) => {
         >
             <Box className='modal__wrapper'>
                 <Box className='modal'>
-                    {images.map(el => <img src={el} alt='' />)}
+                    {images.map(el => <img src={el} key={uuid()} alt='' />)}
                 </Box>
                 <Box className="modal__buttons">
                     <Button color="error" variant="contained" onClick={() => resetImages()}>Clear</Button>

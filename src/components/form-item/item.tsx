@@ -8,7 +8,7 @@ type formItem = {
         [key: string]: string[],
     },
     data: {
-        id: number,
+        id: string,
         count: number,
         breed: string,
         subbreed: string,
@@ -25,6 +25,7 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Breed</InputLabel>
                     <Select
+                        title="breed-field"
                         value={breed}
                         label='breed'
                         onChange={(e) => dispatch(userDataAction.updateBreed(e.target.value, id))}
@@ -68,7 +69,7 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
                     className={!isLast ? 'item__plus-button' : 'item__plus-button item__plus-button--hidden'} 
                     onClick={() => dispatch(userDataAction.addNewField())}
                 >
-                    +
+                    Add
                 </button>
              </Box>
         </div>
