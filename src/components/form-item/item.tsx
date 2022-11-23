@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import './styles.scss';
 import { userDataAction } from '../../redux/actions/dataActions';
+import AddButton from '../common/buttons/add-button';
 
 type formItem = {
     breeds: {
@@ -23,17 +24,17 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
         <div className="item">
             <Box sx={{ minWidth: 200 }}>
                 <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Breed</InputLabel>
-                    <Select
-                        title="breed-field"
-                        value={breed}
+                     <InputLabel id="demo-simple-select-label2">Breed</InputLabel>
+                     <Select
+                        label='Breed'
                         data-testid="breed"
+                        value={breed}
                         onChange={(e) => dispatch(userDataAction.updateBreed(e.target.value, id))}
                     >
-                            {Object.keys(breeds).map((el) => (
-                                <MenuItem key={el} value={el} id={el}>{el}</MenuItem>
-                            ))}
-                    </Select>
+                        {Object.keys(breeds).map((el) => (
+                            <MenuItem key={el} value={el} id={el}>{el}</MenuItem>
+                        ))}
+                     </Select>
                 </FormControl>
             </Box>
             <Box sx={{ minWidth: 200 }}>
@@ -50,9 +51,9 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
                             ))}
                      </Select>
                  </FormControl>
-             </Box>
-             <Box sx={{ minWidth: 200, display: 'flex' }}>
-                 <FormControl fullWidth>
+            </Box>
+            <Box sx={{ minWidth: 200, display: 'flex' }}>
+                <FormControl fullWidth>
                     <TextField
                         type='number'
                         label='Count'
@@ -64,14 +65,9 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
                         value={count}
                         onChange={(e) => dispatch(userDataAction.updateCount(+e.target.value, id))}
                     />
-                 </FormControl>
-                <button 
-                    className={!isLast ? 'item__plus-button' : 'item__plus-button item__plus-button--hidden'} 
-                    onClick={() => dispatch(userDataAction.addNewField())}
-                >
-                    Add
-                </button>
-             </Box>
+                </FormControl>
+                <AddButton isLast={isLast} onClick={() => dispatch(userDataAction.addNewField())} />
+            </Box>
         </div>
         )
     }

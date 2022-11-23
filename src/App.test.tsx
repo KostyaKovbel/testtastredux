@@ -1,6 +1,9 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
+import '@testing-library/jest-dom/extend-expect'
 import { getBreeds } from './utils/api';
+import AddButton from './components/common/buttons/add-button';
+import RequestButton from './components/common/buttons/request-button';
 
 describe('ui tests', () => {
   test('find title', async () => {
@@ -25,10 +28,11 @@ describe('ui tests', () => {
     render(<App />);
   
     await waitFor(() => {
-      const addNewFieldButton = screen.getByText(/Add/i);
+      const addNewFieldButton = screen.getByTestId('add-button');
       expect(addNewFieldButton).toBeInTheDocument();
     });
   });
+});
 
 describe('api tests', () => {
   test('get breeds data from server', async () => {
@@ -68,26 +72,30 @@ describe('api tests', () => {
 describe('button tests', () => {
   test('is button disabled', async () => {
     render(<App />);
-    
-      const isDisabled = !!screen.getByTestId(/breed/i).getAttribute('value');
-      const buttonElement = screen.getByText(/Generate images/i);
-    
-      await waitFor(() => {
-        expect(!!buttonElement.getAttribute('value')).toBe(isDisabled)
-      });
-    });
-  })
-
-  test('add new field on click', async () => {
-    render(<App />);
-    const addNewField = jest.fn();
-    
-    const buttonElement = screen.getByText(/Add/i);
-    fireEvent.click(buttonElement);
-
+  
+    const isDisabled = !!screen.getByTestId(/breed/i).getAttribute('value');
+    const buttonElement = screen.getByTestId('open-modal-button');
+  
     await waitFor(() => {
-        expect(addNewField).toBeCalledTimes(1);
+      expect(!!buttonElement.getAttribute('value')).toBe(isDisabled)
     });
   });
 
-});
+  test('add new field on click', async () => {
+    const addNewField = jest.fn();
+    render(<AddButton isLast={true} onClick={addNewField} />);
+    
+    const buttonElement = screen.getByTestId('add-button')
+    fireEvent.click(buttonElement);
+    expect(addNewField).toBeCalledTimes(1);
+  });
+
+  test('open images modal', async () => {
+    const openModal = jest.fn();
+    render(<RequestButton isDisabled={false} onClick={openModal} />);
+    
+    const buttonElement = screen.getByTestId('open-modal-button')
+    fireEvent.click(buttonElement);
+    expect(openModal).toBeCalledTimes(1);
+  });
+})

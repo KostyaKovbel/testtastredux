@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import React, { lazy, useEffect, useState } from 'react';
 import { useAppSelector } from '../../redux/features/hooks';
 import { RootState } from '../../redux/store';
@@ -6,6 +5,7 @@ import './styles.scss';
 import { actionBreeds } from '../../redux/actions/breedsActions';
 import { useAppDispatch } from '../../redux/features/hooks';
 import { getBreeds } from '../../utils/api';
+import RequestButton from '../common/buttons/request-button';
 
 
 const Item = lazy(() => import('../form-item/item'));
@@ -48,14 +48,7 @@ export const Form: React.FC = () => {
                     isLast={index + 1 !== breedList.userData.length} 
                 />
             )}
-            <Button 
-                className="form__button" 
-                variant="outlined" 
-                disabled={breedList.userData.some((el) => !el.breed)} 
-                onClick={() => setIsOpen(true)}
-                >
-                    Generate images
-                </Button>
+            <RequestButton onClick={() => setIsOpen(true)} isDisabled={breedList.userData.some((el) => !el.breed)} />
             <ImageModal isOpen={isOpen} handleClose={setIsOpen} />
         </div>
     )
