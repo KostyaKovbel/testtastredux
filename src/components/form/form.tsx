@@ -40,10 +40,10 @@ export const Form: React.FC = () => {
       });
     }, [dispatch]);
 
-    const handleCloseModal = () => {
-        setIsOpen(false);
+    const handleModalStatus = () => {
+        setIsOpen(!isOpen);
     }
-
+ 
     return (
         <Box className={styles.form}>
             <Typography className={styles.title}>Dog generator</Typography>
@@ -55,8 +55,8 @@ export const Form: React.FC = () => {
                     isLast={index + 1 !== breedList.userData.length} 
                 />
             )}
-            <RequestButton onClick={() => setIsOpen(true)} isDisabled={breedList.userData.some((el) => !el.breed)} />
-            <ImageModal isOpen={isOpen} handleClose={handleCloseModal} />
+            <RequestButton onClick={handleModalStatus} isDisabled={breedList.userData.some((el) => !el.breed)} />
+            <ImageModal isOpen={isOpen} handleClose={handleModalStatus} />
         </Box>
     )
 }
