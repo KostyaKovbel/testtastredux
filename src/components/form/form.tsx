@@ -39,6 +39,11 @@ export const Form: React.FC = () => {
         dispatch(actionBreeds.loadBreeds(dataFromServer.message));
       });
     }, [dispatch]);
+
+    const handleCloseModal = () => {
+        setIsOpen(false);
+    }
+
     return (
         <Box className={styles.form}>
             <Typography className={styles.title}>Dog generator</Typography>
@@ -51,7 +56,7 @@ export const Form: React.FC = () => {
                 />
             )}
             <RequestButton onClick={() => setIsOpen(true)} isDisabled={breedList.userData.some((el) => !el.breed)} />
-            <ImageModal isOpen={isOpen} handleClose={setIsOpen} />
+            <ImageModal isOpen={isOpen} handleClose={handleCloseModal} />
         </Box>
     )
 }

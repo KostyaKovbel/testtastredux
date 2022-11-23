@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Button, Modal } from "@mui/material"
-import uuid from 'react-uuid';
 
 import { RootState } from "../../redux/store";
 import { getBreeds } from '../../utils/api';
@@ -9,7 +8,7 @@ import styles from './styles.module.scss';
 
 type ImageModalType = {
     isOpen: boolean;
-    handleClose: (value: boolean) => void;
+    handleClose: () => void;
 }
 
 type PayloadData = {
@@ -53,16 +52,16 @@ const ImageModal: React.FC<ImageModalType> = ({ isOpen, handleClose }) => {
     return (
         <Modal
             open={isOpen}
-            onClose={() => handleClose(!isOpen)}
+            onClose={handleClose}
         >
             <Box className={styles.wrapper}>
                 <Box className={styles.modal}>
-                    {images.map(el => <img src={el} key={uuid()} alt='' />)}
+                    {images.map((el, index) => <img src={el} key={index} alt='' />)}
                 </Box>
                 <Box className={styles.buttons}>
-                    <Button color="error" variant="contained" onClick={() => resetImages()}>Clear</Button>
-                    <Button color="success" variant="contained" onClick={() => reloadImages()}>Upload new!</Button>
-                    <Button variant="contained"onClick={() => handleClose(!isOpen)} >Close</Button>
+                    <Button color="error" variant="contained" onClick={resetImages}>Clear</Button>
+                    <Button color="success" variant="contained" onClick={reloadImages}>Upload new!</Button>
+                    <Button variant="contained" onClick={handleClose} >Close</Button>
                 </Box>
             </Box>
         </Modal>

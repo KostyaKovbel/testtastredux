@@ -21,6 +21,11 @@ type formItem = {
 export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
     const { id, count, breed, subbreed } = data;
     const dispatch = useDispatch();
+
+    const addNewField = () => {
+        dispatch(userDataAction.addNewField())
+    };
+
     return (
         <Box className={styles.item}>
             <Box sx={{ minWidth: 200 }}>
@@ -67,7 +72,7 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
                         onChange={(e) => dispatch(userDataAction.updateCount(+e.target.value, id))}
                     />
                 </FormControl>
-                <AddButton isLast={isLast} onClick={() => dispatch(userDataAction.addNewField())} />
+                <AddButton isLast={isLast} onClick={addNewField} />
             </Box>
         </Box>
         )

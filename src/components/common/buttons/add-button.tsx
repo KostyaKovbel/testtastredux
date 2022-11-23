@@ -10,7 +10,7 @@ const AddButton: React.FC<AddProps> = ({ onClick, isLast }) => (
     <Button
         data-testid="add-button"
         className={`${styles.active} ${isLast && styles.hidden}`} 
-        onClick={() => onClick()}
+        onClick={onClick}
     >
         Add
     </Button>

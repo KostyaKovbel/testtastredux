@@ -10,7 +10,7 @@ const RequestButton: React.FC<RequestButtonProps> = ({ onClick, isDisabled }) =>
         data-testid="open-modal-button"
         variant="outlined" 
         disabled={isDisabled} 
-        onClick={() => onClick()}
+        onClick={onClick}
         >
             Generate images
     </Button>
