@@ -27,7 +27,7 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
                     <Select
                         title="breed-field"
                         value={breed}
-                        label='breed'
+                        data-testid="breed"
                         onChange={(e) => dispatch(userDataAction.updateBreed(e.target.value, id))}
                     >
                             {Object.keys(breeds).map((el) => (
