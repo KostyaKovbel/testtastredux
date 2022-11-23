@@ -1,4 +1,5 @@
-import './styles.scss';
+import { Button } from '@mui/material';
+import styles from './styles.module.scss';
 
 type AddProps = {
     isLast: boolean,
@@ -6,13 +7,13 @@ type AddProps = {
 }
 
 const AddButton: React.FC<AddProps> = ({ onClick, isLast }) => (
-    <button
+    <Button
         data-testid="add-button"
-        className={!isLast ? 'add-button' : 'add-button add-button--hidden'} 
+        className={`${styles.active} ${isLast && styles.hidden}`} 
         onClick={() => onClick()}
     >
         Add
-    </button>
+    </Button>
 );
 
 export default AddButton;

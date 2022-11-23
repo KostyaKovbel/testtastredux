@@ -5,13 +5,12 @@ import { Oval } from 'react-loader-spinner';
 
 import store from './redux/store';
 import './App.scss';
-// import Form from './components/form/form';
 const Form = lazy(() => import('./components/form/form'));
 
 const App: React.FC = () => {
   
   return (
-    <Container>
+    <Container maxWidth="md">
       <Suspense 
         fallback={
           <Oval

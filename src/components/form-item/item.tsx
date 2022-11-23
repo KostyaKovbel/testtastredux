@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import './styles.scss';
+
+import styles from './styles.module.scss';
 import { userDataAction } from '../../redux/actions/dataActions';
 import AddButton from '../common/buttons/add-button';
 
@@ -21,7 +22,7 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
     const { id, count, breed, subbreed } = data;
     const dispatch = useDispatch();
     return (
-        <div className="item">
+        <Box className={styles.item}>
             <Box sx={{ minWidth: 200 }}>
                 <FormControl fullWidth>
                      <InputLabel id="demo-simple-select-label2">Breed</InputLabel>
@@ -68,7 +69,7 @@ export const Item: React.FC<formItem> = ({ breeds, data, isLast }) => {
                 </FormControl>
                 <AddButton isLast={isLast} onClick={() => dispatch(userDataAction.addNewField())} />
             </Box>
-        </div>
+        </Box>
         )
     }
 

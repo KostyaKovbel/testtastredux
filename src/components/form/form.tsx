@@ -1,7 +1,9 @@
 import React, { lazy, useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
 import { useAppSelector } from '../../redux/features/hooks';
 import { RootState } from '../../redux/store';
-import './styles.scss';
+
+import styles from './styles.module.scss';
 import { actionBreeds } from '../../redux/actions/breedsActions';
 import { useAppDispatch } from '../../redux/features/hooks';
 import { getBreeds } from '../../utils/api';
@@ -38,8 +40,8 @@ export const Form: React.FC = () => {
       });
     }, [dispatch]);
     return (
-        <div className="form">
-            <h3 className="form__title">Dog generator</h3>
+        <Box className={styles.form}>
+            <Typography className={styles.title}>Dog generator</Typography>
             {breedList.userData.map((el: UserDataType, index: number) =>
                 <Item 
                     key={el.id} 
@@ -50,7 +52,7 @@ export const Form: React.FC = () => {
             )}
             <RequestButton onClick={() => setIsOpen(true)} isDisabled={breedList.userData.some((el) => !el.breed)} />
             <ImageModal isOpen={isOpen} handleClose={setIsOpen} />
-        </div>
+        </Box>
     )
 }
 

@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 
 import { RootState } from "../../redux/store";
 import { getBreeds } from '../../utils/api';
-import './styles.scss';
+import styles from './styles.module.scss';
 
 type ImageModalType = {
     isOpen: boolean;
@@ -55,11 +55,11 @@ const ImageModal: React.FC<ImageModalType> = ({ isOpen, handleClose }) => {
             open={isOpen}
             onClose={() => handleClose(!isOpen)}
         >
-            <Box className='modal__wrapper'>
-                <Box className='modal'>
+            <Box className={styles.wrapper}>
+                <Box className={styles.modal}>
                     {images.map(el => <img src={el} key={uuid()} alt='' />)}
                 </Box>
-                <Box className="modal__buttons">
+                <Box className={styles.buttons}>
                     <Button color="error" variant="contained" onClick={() => resetImages()}>Clear</Button>
                     <Button color="success" variant="contained" onClick={() => reloadImages()}>Upload new!</Button>
                     <Button variant="contained"onClick={() => handleClose(!isOpen)} >Close</Button>
